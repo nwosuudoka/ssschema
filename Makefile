@@ -77,5 +77,5 @@ generate: lint
 	buf generate protos/ -o build
 
 lint:
-	# buf breaking --against 'https://github.com/nwosuudoka/ssprotos#branch=master' protos/
+	# buf breaking protos/ --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main'
 	buf lint protos/

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package subscribedkeyword.v1;
+
+option go_package = "github.com/nwosuudoka/sscproto/build/go/subscribedkeyword/v1";
+
+// SubscribedKeyword represents a keyword a user subscribed to.
+message SubscribedKeyword {
+    // Id represents the id of the record in the database.
+    string id = 1;
+    // UserId represents the user id that subscribed to the word.
+    string user_id = 2;
+    // Keyword represents the keyword they subscribed to.
+    string keyword = 3;
+}
