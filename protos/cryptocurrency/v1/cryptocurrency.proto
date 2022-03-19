@@ -24,9 +24,12 @@ message Cryptocurrency {
 message CoinmarketCap {
     // Id represnets the coinmarketcap id.
     int32 id = 1;
-    // Info holds coinmarketcap info.
-    CoinmarketCapInfo info = 2;
+    // CoinmarketCapListing represents the coin listing info
+    CoinmarketCapListing listing = 2;
+    // CoinmarketCapListing holds coinmarketcap info.
+    CoinmarketCapMetadata info = 3;
 }
+
 
 // CoinmarketCapQuote quote.
 message CoinmarketCapQuote {
@@ -46,8 +49,8 @@ message CoinmarketCapQuote {
 	string last_updated = 7;
 }
 
-// CoinmarketCapInfo holds the info of the coin.
-message CoinmarketCapInfo {
+// CoinmarketCapListing holds the info of the coin.
+message CoinmarketCapListing {
     // Quote represnets the quote of the cryptocurrency in different fiat currencies.
     map<string,CoinmarketCapQuote> quote = 1;
     // MaxSupply represents the max supply this currency can have.
@@ -62,8 +65,24 @@ message CoinmarketCapInfo {
     string last_updated = 6;
 }
 
-// CoinmarketCapMetadata represents the md of the coin.
+// CoinmarketCapMetadata represents the coin metadata.
 message CoinmarketCapMetadata {
+    // Description represents the coin description.
+    string description = 1;
+    // DateAdded represents the date the coin was added.
+	string date_added = 2;
+    // DateLaunched represents the date the coin was launched.
+	string date_launched = 3;
+    // Category represents the category of the coin.
+	string category = 4;
+    // Logo represents the coin logo.
+	string logo = 5;
+    // Urls represents other urls of the coin.
+	CoinmarketCapUrls urls = 6;
+}
+
+// CoinmarketCapMetadata represents the md of the coin.
+message CoinmarketCapUrls {
     // Website represents the website of the cmc data.
     repeated string website = 1;
     // Twitter represents the twitter info of the cmc data.

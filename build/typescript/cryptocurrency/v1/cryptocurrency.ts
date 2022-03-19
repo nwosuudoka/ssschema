@@ -24,8 +24,10 @@ export interface Cryptocurrency {
 export interface CoinmarketCap {
   /** Id represnets the coinmarketcap id. */
   id: number;
-  /** Info holds coinmarketcap info. */
-  info: CoinmarketCapInfo | undefined;
+  /** CoinmarketCapListing represents the coin listing info */
+  listing: CoinmarketCapListing | undefined;
+  /** CoinmarketCapListing holds coinmarketcap info. */
+  info: CoinmarketCapMetadata | undefined;
 }
 
 /** CoinmarketCapQuote quote. */
@@ -46,8 +48,8 @@ export interface CoinmarketCapQuote {
   lastUpdated: string;
 }
 
-/** CoinmarketCapInfo holds the info of the coin. */
-export interface CoinmarketCapInfo {
+/** CoinmarketCapListing holds the info of the coin. */
+export interface CoinmarketCapListing {
   /** Quote represnets the quote of the cryptocurrency in different fiat currencies. */
   quote: { [key: string]: CoinmarketCapQuote };
   /** MaxSupply represents the max supply this currency can have. */
@@ -62,13 +64,29 @@ export interface CoinmarketCapInfo {
   lastUpdated: string;
 }
 
-export interface CoinmarketCapInfo_QuoteEntry {
+export interface CoinmarketCapListing_QuoteEntry {
   key: string;
   value: CoinmarketCapQuote | undefined;
 }
 
-/** CoinmarketCapMetadata represents the md of the coin. */
+/** CoinmarketCapMetadata represents the coin metadata. */
 export interface CoinmarketCapMetadata {
+  /** Description represents the coin description. */
+  description: string;
+  /** DateAdded represents the date the coin was added. */
+  dateAdded: string;
+  /** DateLaunched represents the date the coin was launched. */
+  dateLaunched: string;
+  /** Category represents the category of the coin. */
+  category: string;
+  /** Logo represents the coin logo. */
+  logo: string;
+  /** Urls represents other urls of the coin. */
+  urls: CoinmarketCapUrls | undefined;
+}
+
+/** CoinmarketCapMetadata represents the md of the coin. */
+export interface CoinmarketCapUrls {
   /** Website represents the website of the cmc data. */
   website: string[];
   /** Twitter represents the twitter info of the cmc data. */
@@ -204,7 +222,7 @@ export const Cryptocurrency = {
 };
 
 function createBaseCoinmarketCap(): CoinmarketCap {
-  return { id: 0, info: undefined };
+  return { id: 0, listing: undefined, info: undefined };
 }
 
 export const CoinmarketCap = {
@@ -212,8 +230,17 @@ export const CoinmarketCap = {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
+    if (message.listing !== undefined) {
+      CoinmarketCapListing.encode(
+        message.listing,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
     if (message.info !== undefined) {
-      CoinmarketCapInfo.encode(message.info, writer.uint32(18).fork()).ldelim();
+      CoinmarketCapMetadata.encode(
+        message.info,
+        writer.uint32(26).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -229,7 +256,13 @@ export const CoinmarketCap = {
           message.id = reader.int32();
           break;
         case 2:
-          message.info = CoinmarketCapInfo.decode(reader, reader.uint32());
+          message.listing = CoinmarketCapListing.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        case 3:
+          message.info = CoinmarketCapMetadata.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -242,8 +275,11 @@ export const CoinmarketCap = {
   fromJSON(object: any): CoinmarketCap {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
+      listing: isSet(object.listing)
+        ? CoinmarketCapListing.fromJSON(object.listing)
+        : undefined,
       info: isSet(object.info)
-        ? CoinmarketCapInfo.fromJSON(object.info)
+        ? CoinmarketCapMetadata.fromJSON(object.info)
         : undefined,
     };
   },
@@ -251,9 +287,13 @@ export const CoinmarketCap = {
   toJSON(message: CoinmarketCap): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
+    message.listing !== undefined &&
+      (obj.listing = message.listing
+        ? CoinmarketCapListing.toJSON(message.listing)
+        : undefined);
     message.info !== undefined &&
       (obj.info = message.info
-        ? CoinmarketCapInfo.toJSON(message.info)
+        ? CoinmarketCapMetadata.toJSON(message.info)
         : undefined);
     return obj;
   },
@@ -263,9 +303,13 @@ export const CoinmarketCap = {
   ): CoinmarketCap {
     const message = createBaseCoinmarketCap();
     message.id = object.id ?? 0;
+    message.listing =
+      object.listing !== undefined && object.listing !== null
+        ? CoinmarketCapListing.fromPartial(object.listing)
+        : undefined;
     message.info =
       object.info !== undefined && object.info !== null
-        ? CoinmarketCapInfo.fromPartial(object.info)
+        ? CoinmarketCapMetadata.fromPartial(object.info)
         : undefined;
     return message;
   },
@@ -397,7 +441,7 @@ export const CoinmarketCapQuote = {
   },
 };
 
-function createBaseCoinmarketCapInfo(): CoinmarketCapInfo {
+function createBaseCoinmarketCapListing(): CoinmarketCapListing {
   return {
     quote: {},
     maxSupply: 0,
@@ -408,10 +452,13 @@ function createBaseCoinmarketCapInfo(): CoinmarketCapInfo {
   };
 }
 
-export const CoinmarketCapInfo = {
-  encode(message: CoinmarketCapInfo, writer: Writer = Writer.create()): Writer {
+export const CoinmarketCapListing = {
+  encode(
+    message: CoinmarketCapListing,
+    writer: Writer = Writer.create()
+  ): Writer {
     Object.entries(message.quote).forEach(([key, value]) => {
-      CoinmarketCapInfo_QuoteEntry.encode(
+      CoinmarketCapListing_QuoteEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork()
       ).ldelim();
@@ -434,15 +481,15 @@ export const CoinmarketCapInfo = {
     return writer;
   },
 
-  decode(input: Reader | Uint8Array, length?: number): CoinmarketCapInfo {
+  decode(input: Reader | Uint8Array, length?: number): CoinmarketCapListing {
     const reader = input instanceof Reader ? input : new Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCoinmarketCapInfo();
+    const message = createBaseCoinmarketCapListing();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = CoinmarketCapInfo_QuoteEntry.decode(
+          const entry1 = CoinmarketCapListing_QuoteEntry.decode(
             reader,
             reader.uint32()
           );
@@ -473,7 +520,7 @@ export const CoinmarketCapInfo = {
     return message;
   },
 
-  fromJSON(object: any): CoinmarketCapInfo {
+  fromJSON(object: any): CoinmarketCapListing {
     return {
       quote: isObject(object.quote)
         ? Object.entries(object.quote).reduce<{
@@ -493,7 +540,7 @@ export const CoinmarketCapInfo = {
     };
   },
 
-  toJSON(message: CoinmarketCapInfo): unknown {
+  toJSON(message: CoinmarketCapListing): unknown {
     const obj: any = {};
     obj.quote = {};
     if (message.quote) {
@@ -512,10 +559,10 @@ export const CoinmarketCapInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CoinmarketCapInfo>, I>>(
+  fromPartial<I extends Exact<DeepPartial<CoinmarketCapListing>, I>>(
     object: I
-  ): CoinmarketCapInfo {
-    const message = createBaseCoinmarketCapInfo();
+  ): CoinmarketCapListing {
+    const message = createBaseCoinmarketCapListing();
     message.quote = Object.entries(object.quote ?? {}).reduce<{
       [key: string]: CoinmarketCapQuote;
     }>((acc, [key, value]) => {
@@ -533,13 +580,13 @@ export const CoinmarketCapInfo = {
   },
 };
 
-function createBaseCoinmarketCapInfo_QuoteEntry(): CoinmarketCapInfo_QuoteEntry {
+function createBaseCoinmarketCapListing_QuoteEntry(): CoinmarketCapListing_QuoteEntry {
   return { key: "", value: undefined };
 }
 
-export const CoinmarketCapInfo_QuoteEntry = {
+export const CoinmarketCapListing_QuoteEntry = {
   encode(
-    message: CoinmarketCapInfo_QuoteEntry,
+    message: CoinmarketCapListing_QuoteEntry,
     writer: Writer = Writer.create()
   ): Writer {
     if (message.key !== "") {
@@ -557,10 +604,10 @@ export const CoinmarketCapInfo_QuoteEntry = {
   decode(
     input: Reader | Uint8Array,
     length?: number
-  ): CoinmarketCapInfo_QuoteEntry {
+  ): CoinmarketCapListing_QuoteEntry {
     const reader = input instanceof Reader ? input : new Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCoinmarketCapInfo_QuoteEntry();
+    const message = createBaseCoinmarketCapListing_QuoteEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -578,7 +625,7 @@ export const CoinmarketCapInfo_QuoteEntry = {
     return message;
   },
 
-  fromJSON(object: any): CoinmarketCapInfo_QuoteEntry {
+  fromJSON(object: any): CoinmarketCapListing_QuoteEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value)
@@ -587,7 +634,7 @@ export const CoinmarketCapInfo_QuoteEntry = {
     };
   },
 
-  toJSON(message: CoinmarketCapInfo_QuoteEntry): unknown {
+  toJSON(message: CoinmarketCapListing_QuoteEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
@@ -597,10 +644,10 @@ export const CoinmarketCapInfo_QuoteEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CoinmarketCapInfo_QuoteEntry>, I>>(
+  fromPartial<I extends Exact<DeepPartial<CoinmarketCapListing_QuoteEntry>, I>>(
     object: I
-  ): CoinmarketCapInfo_QuoteEntry {
-    const message = createBaseCoinmarketCapInfo_QuoteEntry();
+  ): CoinmarketCapListing_QuoteEntry {
+    const message = createBaseCoinmarketCapListing_QuoteEntry();
     message.key = object.key ?? "";
     message.value =
       object.value !== undefined && object.value !== null
@@ -612,6 +659,124 @@ export const CoinmarketCapInfo_QuoteEntry = {
 
 function createBaseCoinmarketCapMetadata(): CoinmarketCapMetadata {
   return {
+    description: "",
+    dateAdded: "",
+    dateLaunched: "",
+    category: "",
+    logo: "",
+    urls: undefined,
+  };
+}
+
+export const CoinmarketCapMetadata = {
+  encode(
+    message: CoinmarketCapMetadata,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.description !== "") {
+      writer.uint32(10).string(message.description);
+    }
+    if (message.dateAdded !== "") {
+      writer.uint32(18).string(message.dateAdded);
+    }
+    if (message.dateLaunched !== "") {
+      writer.uint32(26).string(message.dateLaunched);
+    }
+    if (message.category !== "") {
+      writer.uint32(34).string(message.category);
+    }
+    if (message.logo !== "") {
+      writer.uint32(42).string(message.logo);
+    }
+    if (message.urls !== undefined) {
+      CoinmarketCapUrls.encode(message.urls, writer.uint32(50).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): CoinmarketCapMetadata {
+    const reader = input instanceof Reader ? input : new Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCoinmarketCapMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.description = reader.string();
+          break;
+        case 2:
+          message.dateAdded = reader.string();
+          break;
+        case 3:
+          message.dateLaunched = reader.string();
+          break;
+        case 4:
+          message.category = reader.string();
+          break;
+        case 5:
+          message.logo = reader.string();
+          break;
+        case 6:
+          message.urls = CoinmarketCapUrls.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CoinmarketCapMetadata {
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      dateAdded: isSet(object.dateAdded) ? String(object.dateAdded) : "",
+      dateLaunched: isSet(object.dateLaunched)
+        ? String(object.dateLaunched)
+        : "",
+      category: isSet(object.category) ? String(object.category) : "",
+      logo: isSet(object.logo) ? String(object.logo) : "",
+      urls: isSet(object.urls)
+        ? CoinmarketCapUrls.fromJSON(object.urls)
+        : undefined,
+    };
+  },
+
+  toJSON(message: CoinmarketCapMetadata): unknown {
+    const obj: any = {};
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.dateAdded !== undefined && (obj.dateAdded = message.dateAdded);
+    message.dateLaunched !== undefined &&
+      (obj.dateLaunched = message.dateLaunched);
+    message.category !== undefined && (obj.category = message.category);
+    message.logo !== undefined && (obj.logo = message.logo);
+    message.urls !== undefined &&
+      (obj.urls = message.urls
+        ? CoinmarketCapUrls.toJSON(message.urls)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CoinmarketCapMetadata>, I>>(
+    object: I
+  ): CoinmarketCapMetadata {
+    const message = createBaseCoinmarketCapMetadata();
+    message.description = object.description ?? "";
+    message.dateAdded = object.dateAdded ?? "";
+    message.dateLaunched = object.dateLaunched ?? "";
+    message.category = object.category ?? "";
+    message.logo = object.logo ?? "";
+    message.urls =
+      object.urls !== undefined && object.urls !== null
+        ? CoinmarketCapUrls.fromPartial(object.urls)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseCoinmarketCapUrls(): CoinmarketCapUrls {
+  return {
     website: [],
     twitter: [],
     reddit: [],
@@ -621,11 +786,8 @@ function createBaseCoinmarketCapMetadata(): CoinmarketCapMetadata {
   };
 }
 
-export const CoinmarketCapMetadata = {
-  encode(
-    message: CoinmarketCapMetadata,
-    writer: Writer = Writer.create()
-  ): Writer {
+export const CoinmarketCapUrls = {
+  encode(message: CoinmarketCapUrls, writer: Writer = Writer.create()): Writer {
     for (const v of message.website) {
       writer.uint32(10).string(v!);
     }
@@ -647,10 +809,10 @@ export const CoinmarketCapMetadata = {
     return writer;
   },
 
-  decode(input: Reader | Uint8Array, length?: number): CoinmarketCapMetadata {
+  decode(input: Reader | Uint8Array, length?: number): CoinmarketCapUrls {
     const reader = input instanceof Reader ? input : new Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCoinmarketCapMetadata();
+    const message = createBaseCoinmarketCapUrls();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -680,7 +842,7 @@ export const CoinmarketCapMetadata = {
     return message;
   },
 
-  fromJSON(object: any): CoinmarketCapMetadata {
+  fromJSON(object: any): CoinmarketCapUrls {
     return {
       website: Array.isArray(object?.website)
         ? object.website.map((e: any) => String(e))
@@ -703,7 +865,7 @@ export const CoinmarketCapMetadata = {
     };
   },
 
-  toJSON(message: CoinmarketCapMetadata): unknown {
+  toJSON(message: CoinmarketCapUrls): unknown {
     const obj: any = {};
     if (message.website) {
       obj.website = message.website.map((e) => e);
@@ -738,10 +900,10 @@ export const CoinmarketCapMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CoinmarketCapMetadata>, I>>(
+  fromPartial<I extends Exact<DeepPartial<CoinmarketCapUrls>, I>>(
     object: I
-  ): CoinmarketCapMetadata {
-    const message = createBaseCoinmarketCapMetadata();
+  ): CoinmarketCapUrls {
+    const message = createBaseCoinmarketCapUrls();
     message.website = object.website?.map((e) => e) || [];
     message.twitter = object.twitter?.map((e) => e) || [];
     message.reddit = object.reddit?.map((e) => e) || [];
