@@ -1,0 +1,13 @@
+version: v1beta1
+plugins:
+  - name: go
+    out: go
+    opt: paths=source_relative
+  - name: go-grpc
+    out: go
+    opt: paths=source_relative
+  - name: python
+    out: python/schemas
+  - name: ts
+    out: typescript
+    path: node_modules/.bin/protoc-gen-ts_proto
