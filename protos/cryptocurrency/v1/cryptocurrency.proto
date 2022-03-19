@@ -95,4 +95,10 @@ message CoinmarketCapUrls {
     repeated string chat = 5;
     // TechnicalDoc represents the technical doc of the data.
 	repeated string technical_doc = 6; 
+    // MessageBoards represents the technical doc of the data.
+	repeated string message_board = 7; 
+    // Explorer represents the technical doc of the data.
+	repeated string explorer = 8; 
+    // Announcement represents the technical doc of the data.
+	repeated string announcement = 9; 
 }

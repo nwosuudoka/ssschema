@@ -99,6 +99,12 @@ export interface CoinmarketCapUrls {
   chat: string[];
   /** TechnicalDoc represents the technical doc of the data. */
   technicalDoc: string[];
+  /** MessageBoards represents the technical doc of the data. */
+  messageBoard: string[];
+  /** Explorer represents the technical doc of the data. */
+  explorer: string[];
+  /** Announcement represents the technical doc of the data. */
+  announcement: string[];
 }
 
 function createBaseCryptocurrency(): Cryptocurrency {
@@ -783,6 +789,9 @@ function createBaseCoinmarketCapUrls(): CoinmarketCapUrls {
     sourceCode: [],
     chat: [],
     technicalDoc: [],
+    messageBoard: [],
+    explorer: [],
+    announcement: [],
   };
 }
 
@@ -805,6 +814,15 @@ export const CoinmarketCapUrls = {
     }
     for (const v of message.technicalDoc) {
       writer.uint32(50).string(v!);
+    }
+    for (const v of message.messageBoard) {
+      writer.uint32(58).string(v!);
+    }
+    for (const v of message.explorer) {
+      writer.uint32(66).string(v!);
+    }
+    for (const v of message.announcement) {
+      writer.uint32(74).string(v!);
     }
     return writer;
   },
@@ -834,6 +852,15 @@ export const CoinmarketCapUrls = {
         case 6:
           message.technicalDoc.push(reader.string());
           break;
+        case 7:
+          message.messageBoard.push(reader.string());
+          break;
+        case 8:
+          message.explorer.push(reader.string());
+          break;
+        case 9:
+          message.announcement.push(reader.string());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -861,6 +888,15 @@ export const CoinmarketCapUrls = {
         : [],
       technicalDoc: Array.isArray(object?.technicalDoc)
         ? object.technicalDoc.map((e: any) => String(e))
+        : [],
+      messageBoard: Array.isArray(object?.messageBoard)
+        ? object.messageBoard.map((e: any) => String(e))
+        : [],
+      explorer: Array.isArray(object?.explorer)
+        ? object.explorer.map((e: any) => String(e))
+        : [],
+      announcement: Array.isArray(object?.announcement)
+        ? object.announcement.map((e: any) => String(e))
         : [],
     };
   },
@@ -897,6 +933,21 @@ export const CoinmarketCapUrls = {
     } else {
       obj.technicalDoc = [];
     }
+    if (message.messageBoard) {
+      obj.messageBoard = message.messageBoard.map((e) => e);
+    } else {
+      obj.messageBoard = [];
+    }
+    if (message.explorer) {
+      obj.explorer = message.explorer.map((e) => e);
+    } else {
+      obj.explorer = [];
+    }
+    if (message.announcement) {
+      obj.announcement = message.announcement.map((e) => e);
+    } else {
+      obj.announcement = [];
+    }
     return obj;
   },
 
@@ -910,6 +961,9 @@ export const CoinmarketCapUrls = {
     message.sourceCode = object.sourceCode?.map((e) => e) || [];
     message.chat = object.chat?.map((e) => e) || [];
     message.technicalDoc = object.technicalDoc?.map((e) => e) || [];
+    message.messageBoard = object.messageBoard?.map((e) => e) || [];
+    message.explorer = object.explorer?.map((e) => e) || [];
+    message.announcement = object.announcement?.map((e) => e) || [];
     return message;
   },
 };
