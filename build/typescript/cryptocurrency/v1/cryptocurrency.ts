@@ -33,17 +33,17 @@ export interface CoinmarketCap {
 /** CoinmarketCapQuote quote. */
 export interface CoinmarketCapQuote {
   /** Price represnets the price change. */
-  price: string;
+  price: number;
   /** Volume24h. */
-  volume24h: string;
+  volume24h: number;
   /** PercentChange1h */
-  percentChange1h: string;
+  percentChange1h: number;
   /** PercentChange24h */
-  percentChange24h: string;
+  percentChange24h: number;
   /** PercentChange7d */
-  percentChange7d: string;
+  percentChange7d: number;
   /** MarketCap */
-  marketCap: string;
+  marketCap: number;
   /** LastUpdated */
   lastUpdated: string;
 }
@@ -323,12 +323,12 @@ export const CoinmarketCap = {
 
 function createBaseCoinmarketCapQuote(): CoinmarketCapQuote {
   return {
-    price: "",
-    volume24h: "",
-    percentChange1h: "",
-    percentChange24h: "",
-    percentChange7d: "",
-    marketCap: "",
+    price: 0,
+    volume24h: 0,
+    percentChange1h: 0,
+    percentChange24h: 0,
+    percentChange7d: 0,
+    marketCap: 0,
     lastUpdated: "",
   };
 }
@@ -338,23 +338,23 @@ export const CoinmarketCapQuote = {
     message: CoinmarketCapQuote,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.price !== "") {
-      writer.uint32(10).string(message.price);
+    if (message.price !== 0) {
+      writer.uint32(9).double(message.price);
     }
-    if (message.volume24h !== "") {
-      writer.uint32(18).string(message.volume24h);
+    if (message.volume24h !== 0) {
+      writer.uint32(17).double(message.volume24h);
     }
-    if (message.percentChange1h !== "") {
-      writer.uint32(26).string(message.percentChange1h);
+    if (message.percentChange1h !== 0) {
+      writer.uint32(25).double(message.percentChange1h);
     }
-    if (message.percentChange24h !== "") {
-      writer.uint32(34).string(message.percentChange24h);
+    if (message.percentChange24h !== 0) {
+      writer.uint32(33).double(message.percentChange24h);
     }
-    if (message.percentChange7d !== "") {
-      writer.uint32(42).string(message.percentChange7d);
+    if (message.percentChange7d !== 0) {
+      writer.uint32(41).double(message.percentChange7d);
     }
-    if (message.marketCap !== "") {
-      writer.uint32(50).string(message.marketCap);
+    if (message.marketCap !== 0) {
+      writer.uint32(49).double(message.marketCap);
     }
     if (message.lastUpdated !== "") {
       writer.uint32(58).string(message.lastUpdated);
@@ -370,22 +370,22 @@ export const CoinmarketCapQuote = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.price = reader.string();
+          message.price = reader.double();
           break;
         case 2:
-          message.volume24h = reader.string();
+          message.volume24h = reader.double();
           break;
         case 3:
-          message.percentChange1h = reader.string();
+          message.percentChange1h = reader.double();
           break;
         case 4:
-          message.percentChange24h = reader.string();
+          message.percentChange24h = reader.double();
           break;
         case 5:
-          message.percentChange7d = reader.string();
+          message.percentChange7d = reader.double();
           break;
         case 6:
-          message.marketCap = reader.string();
+          message.marketCap = reader.double();
           break;
         case 7:
           message.lastUpdated = reader.string();
@@ -400,18 +400,18 @@ export const CoinmarketCapQuote = {
 
   fromJSON(object: any): CoinmarketCapQuote {
     return {
-      price: isSet(object.price) ? String(object.price) : "",
-      volume24h: isSet(object.volume24h) ? String(object.volume24h) : "",
+      price: isSet(object.price) ? Number(object.price) : 0,
+      volume24h: isSet(object.volume24h) ? Number(object.volume24h) : 0,
       percentChange1h: isSet(object.percentChange1h)
-        ? String(object.percentChange1h)
-        : "",
+        ? Number(object.percentChange1h)
+        : 0,
       percentChange24h: isSet(object.percentChange24h)
-        ? String(object.percentChange24h)
-        : "",
+        ? Number(object.percentChange24h)
+        : 0,
       percentChange7d: isSet(object.percentChange7d)
-        ? String(object.percentChange7d)
-        : "",
-      marketCap: isSet(object.marketCap) ? String(object.marketCap) : "",
+        ? Number(object.percentChange7d)
+        : 0,
+      marketCap: isSet(object.marketCap) ? Number(object.marketCap) : 0,
       lastUpdated: isSet(object.lastUpdated) ? String(object.lastUpdated) : "",
     };
   },
@@ -436,12 +436,12 @@ export const CoinmarketCapQuote = {
     object: I
   ): CoinmarketCapQuote {
     const message = createBaseCoinmarketCapQuote();
-    message.price = object.price ?? "";
-    message.volume24h = object.volume24h ?? "";
-    message.percentChange1h = object.percentChange1h ?? "";
-    message.percentChange24h = object.percentChange24h ?? "";
-    message.percentChange7d = object.percentChange7d ?? "";
-    message.marketCap = object.marketCap ?? "";
+    message.price = object.price ?? 0;
+    message.volume24h = object.volume24h ?? 0;
+    message.percentChange1h = object.percentChange1h ?? 0;
+    message.percentChange24h = object.percentChange24h ?? 0;
+    message.percentChange7d = object.percentChange7d ?? 0;
+    message.marketCap = object.marketCap ?? 0;
     message.lastUpdated = object.lastUpdated ?? "";
     return message;
   },
@@ -470,13 +470,13 @@ export const CoinmarketCapListing = {
       ).ldelim();
     });
     if (message.maxSupply !== 0) {
-      writer.uint32(21).float(message.maxSupply);
+      writer.uint32(17).double(message.maxSupply);
     }
     if (message.totalSupply !== 0) {
       writer.uint32(29).float(message.totalSupply);
     }
     if (message.cmcRank !== 0) {
-      writer.uint32(37).float(message.cmcRank);
+      writer.uint32(32).int32(message.cmcRank);
     }
     if (message.circulatingSupply !== 0) {
       writer.uint32(45).float(message.circulatingSupply);
@@ -504,13 +504,13 @@ export const CoinmarketCapListing = {
           }
           break;
         case 2:
-          message.maxSupply = reader.float();
+          message.maxSupply = reader.double();
           break;
         case 3:
           message.totalSupply = reader.float();
           break;
         case 4:
-          message.cmcRank = reader.float();
+          message.cmcRank = reader.int32();
           break;
         case 5:
           message.circulatingSupply = reader.float();
@@ -557,7 +557,8 @@ export const CoinmarketCapListing = {
     message.maxSupply !== undefined && (obj.maxSupply = message.maxSupply);
     message.totalSupply !== undefined &&
       (obj.totalSupply = message.totalSupply);
-    message.cmcRank !== undefined && (obj.cmcRank = message.cmcRank);
+    message.cmcRank !== undefined &&
+      (obj.cmcRank = Math.round(message.cmcRank));
     message.circulatingSupply !== undefined &&
       (obj.circulatingSupply = message.circulatingSupply);
     message.lastUpdated !== undefined &&

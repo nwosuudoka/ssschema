@@ -34,17 +34,17 @@ message CoinmarketCap {
 // CoinmarketCapQuote quote.
 message CoinmarketCapQuote {
     // Price represnets the price change.
-    string price = 1;
+    double price = 1;
     // Volume24h.
-    string volume_24h = 2;
+    double volume_24h = 2;
     // PercentChange1h
-    string percent_change_1h = 3;
+    double percent_change_1h = 3;
     // PercentChange24h
-    string percent_change_24h = 4;
+    double percent_change_24h = 4;
     // PercentChange7d
-    string percent_change_7d = 5;
+    double percent_change_7d = 5;
     // MarketCap
-    string market_cap = 6;
+    double market_cap = 6;
     // LastUpdated 
 	string last_updated = 7;
 }
@@ -54,11 +54,11 @@ message CoinmarketCapListing {
     // Quote represnets the quote of the cryptocurrency in different fiat currencies.
     map<string,CoinmarketCapQuote> quote = 1;
     // MaxSupply represents the max supply this currency can have.
-    float max_supply = 2;
+    double max_supply = 2;
     // TotalSupply represents the total supply this currency can have.
     float total_supply = 3;
     // CMCRank represents the cmc rank of the coin.
-    float cmc_rank = 4;
+    int32 cmc_rank = 4;
     // CirculatingSupply is how many is currenly in circulation.
     float circulating_supply = 5;
     // LastUpdated was the last time this was updated.
