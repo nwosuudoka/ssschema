@@ -473,13 +473,13 @@ export const CoinmarketCapListing = {
       writer.uint32(17).double(message.maxSupply);
     }
     if (message.totalSupply !== 0) {
-      writer.uint32(29).float(message.totalSupply);
+      writer.uint32(25).double(message.totalSupply);
     }
     if (message.cmcRank !== 0) {
       writer.uint32(32).int32(message.cmcRank);
     }
     if (message.circulatingSupply !== 0) {
-      writer.uint32(45).float(message.circulatingSupply);
+      writer.uint32(41).double(message.circulatingSupply);
     }
     if (message.lastUpdated !== "") {
       writer.uint32(50).string(message.lastUpdated);
@@ -507,13 +507,13 @@ export const CoinmarketCapListing = {
           message.maxSupply = reader.double();
           break;
         case 3:
-          message.totalSupply = reader.float();
+          message.totalSupply = reader.double();
           break;
         case 4:
           message.cmcRank = reader.int32();
           break;
         case 5:
-          message.circulatingSupply = reader.float();
+          message.circulatingSupply = reader.double();
           break;
         case 6:
           message.lastUpdated = reader.string();

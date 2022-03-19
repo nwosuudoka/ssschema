@@ -56,11 +56,11 @@ message CoinmarketCapListing {
     // MaxSupply represents the max supply this currency can have.
     double max_supply = 2;
     // TotalSupply represents the total supply this currency can have.
-    float total_supply = 3;
+    double total_supply = 3;
     // CMCRank represents the cmc rank of the coin.
     int32 cmc_rank = 4;
     // CirculatingSupply is how many is currenly in circulation.
-    float circulating_supply = 5;
+    double circulating_supply = 5;
     // LastUpdated was the last time this was updated.
     string last_updated = 6;
 }
