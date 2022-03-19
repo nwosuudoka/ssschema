@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package cryptocurrency.v1;
+
+option go_package = "github.com/nwosuudoka/sscproto/build/go/cryptocurrency/v1";
+
+// Cryptocurrency represents the schema for a cryptocurrency
+message Cryptocurrency {
+    // Id represents the id of the record in the database.
+    int32 id = 1;
+    // Name represents the name of the currency.
+    string name = 2;
+    // Symbol represnets the symbol of the currency.
+    string symbol = 3;
+    // Logo represents the logo of the cryptocurrency.
+    string logo = 4;
+    // Platforms represents the platforms where this currencies are.
+    repeated string platforms = 5;
+    // Coinmarketcap represents the coin market cap data.
+    CoinmarketCap coin_market_cap = 6;
+}
+
+// CoinmarketCap represents the coin market cap information.
+message CoinmarketCap {
+    // Id represnets the coinmarketcap id.
+    int32 id = 1;
+    // Info holds coinmarketcap info.
+    CoinmarketCapInfo info = 2;
+}
+
+// CoinmarketCapQuote quote.
+message CoinmarketCapQuote {
+    // Price represnets the price change.
+    string price = 1;
+    // Volume24h.
+    string volume_24h = 2;
+    // PercentChange1h
+    string percent_change_1h = 3;
+    // PercentChange24h
+    string percent_change_24h = 4;
+    // PercentChange7d
+    string percent_change_7d = 5;
+    // MarketCap
+    string market_cap = 6;
+    // LastUpdated 
+	string last_updated = 7;
+}
+
+// CoinmarketCapInfo holds the info of the coin.
+message CoinmarketCapInfo {
+    // Quote represnets the quote of the cryptocurrency in different fiat currencies.
+    map<string,CoinmarketCapQuote> quote = 1;
+    // MaxSupply represents the max supply this currency can have.
+    float max_supply = 2;
+    // TotalSupply represents the total supply this currency can have.
+    float total_supply = 3;
+    // CMCRank represents the cmc rank of the coin.
+    float cmc_rank = 4;
+    // CirculatingSupply is how many is currenly in circulation.
+    float circulating_supply = 5;
+    // LastUpdated was the last time this was updated.
+    string last_updated = 6;
+}
+
+// CoinmarketCapMetadata represents the md of the coin.
+message CoinmarketCapMetadata {
+    // Website represents the website of the cmc data.
+    repeated string website = 1;
+    // Twitter represents the twitter info of the cmc data.
+	repeated string twitter = 2; 
+    // Reddit represents the reddit info of the cmc data.
+	repeated string reddit = 3; 
+    // SourceCode represents the source_code info of the cmc data.
+    repeated string source_code = 4;
+    // Chat represents the chat infomration of the currency.
+    repeated string chat = 5;
+    // TechnicalDoc represents the technical doc of the data.
+	repeated string technical_doc = 6; 
+}
