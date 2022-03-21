@@ -75,7 +75,6 @@ nvm_use:
 generate: lint
 	rm -rf build
 	buf generate -o build proto
-	# buf generate --template=buf.gen.tag.yaml proto
 	find . -type f -name "*.pb.go" -exec protoc-go-inject-tag -input="{}" \;
 
 lint:

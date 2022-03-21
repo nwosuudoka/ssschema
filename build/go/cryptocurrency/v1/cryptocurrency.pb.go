@@ -38,8 +38,8 @@ type Cryptocurrency struct {
 	Platforms []string `protobuf:"bytes,5,rep,name=platforms,proto3" json:"platforms,omitempty"`
 	// Coinmarketcap represents the coin market cap data.
 	// CoinmarketCap coin_market_cap = 6;
-	// @gotags: bson:"coin_market_cap"
-	CoinMarketCap *CoinmarketCap `protobuf:"bytes,6,opt,name=coin_market_cap,json=coinMarketCap,proto3" json:"coin_market_cap,omitempty" bson:"coin_market_cap"`
+	// @gotags: bson:"coinMarketCap"
+	CoinMarketCap *CoinmarketCap `protobuf:"bytes,6,opt,name=coin_market_cap,json=coinMarketCap,proto3" json:"coin_market_cap,omitempty" bson:"coinMarketCap"`
 }
 
 func (x *Cryptocurrency) Reset() {
@@ -196,23 +196,23 @@ type CoinmarketCapQuote struct {
 	// @gotag: bson:"price"
 	Price float64 `protobuf:"fixed64,1,opt,name=price,proto3" json:"price,omitempty" bson:"price"`
 	// Volume24h.
-	// @gotag: bson:"volume_24h"
-	Volume_24H float64 `protobuf:"fixed64,2,opt,name=volume_24h,json=volume24h,proto3" json:"volume_24h,omitempty" bson:"volume_24h"`
+	// @gotag: bson:"volume24h"
+	Volume_24H float64 `protobuf:"fixed64,2,opt,name=volume_24h,json=volume24h,proto3" json:"volume_24h,omitempty" bson:"volume24h"`
 	// PercentChange1h
-	// @gotag: bson:"percent_change_1h"
-	PercentChange_1H float64 `protobuf:"fixed64,3,opt,name=percent_change_1h,json=percentChange1h,proto3" json:"percent_change_1h,omitempty" bson:"percent_change_1h"`
+	// @gotag: bson:"percentChange1h"
+	PercentChange_1H float64 `protobuf:"fixed64,3,opt,name=percent_change_1h,json=percentChange1h,proto3" json:"percent_change_1h,omitempty" bson:"percentChange1h"`
 	// PercentChange24h
-	// @gotag: bson:"percent_change_24h"
-	PercentChange_24H float64 `protobuf:"fixed64,4,opt,name=percent_change_24h,json=percentChange24h,proto3" json:"percent_change_24h,omitempty" bson:"percent_change_24h"`
+	// @gotag: bson:"percentChange24h"
+	PercentChange_24H float64 `protobuf:"fixed64,4,opt,name=percent_change_24h,json=percentChange24h,proto3" json:"percent_change_24h,omitempty" bson:"percentChange24h"`
 	// PercentChange7d
-	// @gotag: bson:"percent_change_7d"
-	PercentChange_7D float64 `protobuf:"fixed64,5,opt,name=percent_change_7d,json=percentChange7d,proto3" json:"percent_change_7d,omitempty" bson:"percent_change_7d"`
+	// @gotag: bson:"percentChange7d"
+	PercentChange_7D float64 `protobuf:"fixed64,5,opt,name=percent_change_7d,json=percentChange7d,proto3" json:"percent_change_7d,omitempty" bson:"percentChange7d"`
 	// MarketCap
-	// @gotag: bson:"market_cap"
-	MarketCap float64 `protobuf:"fixed64,6,opt,name=market_cap,json=marketCap,proto3" json:"market_cap,omitempty" bson:"market_cap"`
+	// @gotag: bson:"marketCap"
+	MarketCap float64 `protobuf:"fixed64,6,opt,name=market_cap,json=marketCap,proto3" json:"market_cap,omitempty" bson:"marketCap"`
 	// LastUpdated
-	// @gotag: bson:"last_updated"
-	LastUpdated string `protobuf:"bytes,7,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty" bson:"last_updated"`
+	// @gotag: bson:"lastUpdated"
+	LastUpdated string `protobuf:"bytes,7,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty" bson:"lastUpdated"`
 }
 
 func (x *CoinmarketCapQuote) Reset() {
@@ -306,20 +306,20 @@ type CoinmarketCapListing struct {
 	// @gotag: bson:"quote"
 	Quote map[string]*CoinmarketCapQuote `protobuf:"bytes,1,rep,name=quote,proto3" json:"quote,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3" bson:"quote"`
 	// MaxSupply represents the max supply this currency can have.
-	// @gotag: bson:"max_supply"
-	MaxSupply float64 `protobuf:"fixed64,2,opt,name=max_supply,json=maxSupply,proto3" json:"max_supply,omitempty" bson:"max_supply"`
+	// @gotag: bson:"maxSupply"
+	MaxSupply float64 `protobuf:"fixed64,2,opt,name=max_supply,json=maxSupply,proto3" json:"max_supply,omitempty" bson:"maxSupply"`
 	// TotalSupply represents the total supply this currency can have.
-	// @gotag: bson:"total_supply"
-	TotalSupply float64 `protobuf:"fixed64,3,opt,name=total_supply,json=totalSupply,proto3" json:"total_supply,omitempty" bson:"total_supply"`
+	// @gotag: bson:"totalSupply"
+	TotalSupply float64 `protobuf:"fixed64,3,opt,name=total_supply,json=totalSupply,proto3" json:"total_supply,omitempty" bson:"totalSupply"`
 	// CMCRank represents the cmc rank of the coin.
-	// @gotag: bson:"cmc_rank"
-	CmcRank int32 `protobuf:"varint,4,opt,name=cmc_rank,json=cmcRank,proto3" json:"cmc_rank,omitempty" bson:"cmc_rank"`
+	// @gotag: bson:"cmcRank"
+	CmcRank int32 `protobuf:"varint,4,opt,name=cmc_rank,json=cmcRank,proto3" json:"cmc_rank,omitempty" bson:"cmcRank"`
 	// CirculatingSupply is how many is currenly in circulation.
-	// @gotag: bson:"circulating_supply"
-	CirculatingSupply float64 `protobuf:"fixed64,5,opt,name=circulating_supply,json=circulatingSupply,proto3" json:"circulating_supply,omitempty" bson:"circulating_supply"`
+	// @gotag: bson:"circulatingSupply"
+	CirculatingSupply float64 `protobuf:"fixed64,5,opt,name=circulating_supply,json=circulatingSupply,proto3" json:"circulating_supply,omitempty" bson:"circulatingSupply"`
 	// LastUpdated was the last time this was updated.
-	// @gotag: bson:"last_updated"
-	LastUpdated string `protobuf:"bytes,6,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty" bson:"last_updated"`
+	// @gotag: bson:"lastUpdated"
+	LastUpdated string `protobuf:"bytes,6,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty" bson:"lastUpdated"`
 }
 
 func (x *CoinmarketCapListing) Reset() {
@@ -406,11 +406,11 @@ type CoinmarketCapMetadata struct {
 	// @gotag: bson:"description"
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty" bson:"description"`
 	// DateAdded represents the date the coin was added.
-	// @gotag: bson:"date_added"
-	DateAdded string `protobuf:"bytes,2,opt,name=date_added,json=dateAdded,proto3" json:"date_added,omitempty" bson:"date_added"`
+	// @gotag: bson:"dateAdded"
+	DateAdded string `protobuf:"bytes,2,opt,name=date_added,json=dateAdded,proto3" json:"date_added,omitempty" bson:"dateAdded"`
 	// DateLaunched represents the date the coin was launched.
-	// @gotag: bson:"date_launched"
-	DateLaunched string `protobuf:"bytes,3,opt,name=date_launched,json=dateLaunched,proto3" json:"date_launched,omitempty" bson:"date_launched"`
+	// @gotag: bson:"dateLaunched"
+	DateLaunched string `protobuf:"bytes,3,opt,name=date_launched,json=dateLaunched,proto3" json:"date_launched,omitempty" bson:"dateLaunched"`
 	// Category represents the category of the coin.
 	// @gotag: bson:"category"
 	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty" bson:"category"`
@@ -512,17 +512,17 @@ type CoinmarketCapUrls struct {
 	// @gotag: bson:"reddit"
 	Reddit []string `protobuf:"bytes,3,rep,name=reddit,proto3" json:"reddit,omitempty" bson:"reddit"`
 	// SourceCode represents the source_code info of the cmc data.
-	// @gotag: bson:"source_code"
-	SourceCode []string `protobuf:"bytes,4,rep,name=source_code,json=sourceCode,proto3" json:"source_code,omitempty" bson:"source_code"`
+	// @gotag: bson:"sourceCode"
+	SourceCode []string `protobuf:"bytes,4,rep,name=source_code,json=sourceCode,proto3" json:"source_code,omitempty" bson:"sourceCode"`
 	// Chat represents the chat infomration of the currency.
 	// @gotag: bson:"chat"
 	Chat []string `protobuf:"bytes,5,rep,name=chat,proto3" json:"chat,omitempty" bson:"chat"`
 	// TechnicalDoc represents the technical doc of the data.
-	// @gotag: bson:"technical_doc"
-	TechnicalDoc []string `protobuf:"bytes,6,rep,name=technical_doc,json=technicalDoc,proto3" json:"technical_doc,omitempty" bson:"technical_doc"`
+	// @gotag: bson:"technicalDoc"
+	TechnicalDoc []string `protobuf:"bytes,6,rep,name=technical_doc,json=technicalDoc,proto3" json:"technical_doc,omitempty" bson:"technicalDoc"`
 	// MessageBoards represents the technical doc of the data.
-	// @gotag: bson:"message_board"
-	MessageBoard []string `protobuf:"bytes,7,rep,name=message_board,json=messageBoard,proto3" json:"message_board,omitempty" bson:"message_board"`
+	// @gotag: bson:"messageBoard"
+	MessageBoard []string `protobuf:"bytes,7,rep,name=message_board,json=messageBoard,proto3" json:"message_board,omitempty" bson:"messageBoard"`
 	// Explorer represents the technical doc of the data.
 	// @gotag: bson:"explorer"
 	Explorer []string `protobuf:"bytes,8,rep,name=explorer,proto3" json:"explorer,omitempty" bson:"explorer"`
