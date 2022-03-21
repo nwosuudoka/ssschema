@@ -9,7 +9,7 @@ import "tagger/tagger.proto";
 // Cryptocurrency represents the schema for a cryptocurrency
 message Cryptocurrency {
     // Id represents the id of the record in the database.
-    int32 id = 1 [(tagger.tags)="bson:\"id\""];
+    string id = 1 [(tagger.tags)="bson:\"_id\""];
     // Name represents the name of the currency.
     string name = 2 [(tagger.tags)="bson:\"name\""];
     // Symbol represnets the symbol of the currency.
@@ -63,7 +63,7 @@ message CoinmarketCapListing {
     // CMCRank represents the cmc rank of the coin.
     int32 cmc_rank = 4 [(tagger.tags)="bson:\"cmc_rank\""];;
     // CirculatingSupply is how many is currenly in circulation.
-    double circulating_supply = 5 [(tagger.tags)="bson:\"circulating_supply \""];
+    double circulating_supply = 5 [(tagger.tags)="bson:\"circulating_supply\""];
     // LastUpdated was the last time this was updated.
     string last_updated = 6 [(tagger.tags)="bson:\"last_updated\""];;
 }

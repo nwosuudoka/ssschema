@@ -8,8 +8,8 @@ import * as jspb from "google-protobuf";
 import * as tagger_tagger_pb from "../../tagger/tagger_pb";
 
 export class Cryptocurrency extends jspb.Message { 
-    getId(): number;
-    setId(value: number): Cryptocurrency;
+    getId(): string;
+    setId(value: string): Cryptocurrency;
     getName(): string;
     setName(value: string): Cryptocurrency;
     getSymbol(): string;
@@ -38,7 +38,7 @@ export class Cryptocurrency extends jspb.Message {
 
 export namespace Cryptocurrency {
     export type AsObject = {
-        id: number,
+        id: string,
         name: string,
         symbol: string,
         logo: string,
