@@ -5,7 +5,6 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as tagger_tagger_pb from "../../tagger/tagger_pb";
 
 export class Cryptocurrency extends jspb.Message { 
     getId(): string;

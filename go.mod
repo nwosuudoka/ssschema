@@ -6,6 +6,7 @@ require google.golang.org/protobuf v1.27.1
 
 require (
 	github.com/fatih/structtag v1.2.0 // indirect
+	github.com/favadi/protoc-go-inject-tag v1.3.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/lyft/protoc-gen-star v0.5.3 // indirect
 	github.com/spf13/afero v1.5.1 // indirect

@@ -4,104 +4,134 @@ package cryptocurrency.v1;
 
 option go_package = "github.com/nwosuudoka/sscproto/build/go/cryptocurrency/v1";
 
-import "tagger/tagger.proto";
-
 // Cryptocurrency represents the schema for a cryptocurrency
 message Cryptocurrency {
     // Id represents the id of the record in the database.
-    string id = 1 [(tagger.tags)="bson:\"_id\""];
+    string id = 1;
     // Name represents the name of the currency.
-    string name = 2 [(tagger.tags)="bson:\"name\""];
+    string name = 2;
     // Symbol represnets the symbol of the currency.
-    string symbol = 3 [(tagger.tags)="bson:\"symbol\""];
+    string symbol = 3;
     // Logo represents the logo of the cryptocurrency.
-    string logo = 4 [(tagger.tags)="bson:\"logo\""];
+    string logo = 4;
     // Platforms represents the platforms where this currencies are.
-    repeated string platforms = 5 [(tagger.tags)="bson:\"platforms\""];
+    repeated string platforms = 5;
     // Coinmarketcap represents the coin market cap data.
     // CoinmarketCap coin_market_cap = 6;
-    CoinmarketCap coin_market_cap = 6 [(tagger.tags)="bson:\"coin_market_cap\""];
+    // @gotags: bson:"coin_market_cap"
+    CoinmarketCap coin_market_cap = 6;
 }
 
 // CoinmarketCap represents the coin market cap information.
 message CoinmarketCap {
     // Id represnets the coinmarketcap id.
-    int32 id = 1 [(tagger.tags)="bson:\"id\""];
+    // @gotags: bson:"id"
+    int32 id = 1;
     // CoinmarketCapListing represents the coin listing info
-    CoinmarketCapListing listing = 2 [(tagger.tags)="bson:\"listing\""];
+    // @gotags: bson:"listing"
+    CoinmarketCapListing listing = 2;
     // CoinmarketCapListing holds coinmarketcap info.
-    CoinmarketCapMetadata info = 3 [(tagger.tags)="bson:\"info\""];
+    // @gotag: bson:"info"
+    CoinmarketCapMetadata info = 3;
 }
 
 
 // CoinmarketCapQuote quote.
 message CoinmarketCapQuote {
     // Price represnets the price change.
-    double price = 1 [(tagger.tags)="bson:\"price\""];
+    // @gotag: bson:"price"
+    double price = 1;
     // Volume24h.
-    double volume_24h = 2 [(tagger.tags)="bson:\"volume_24h\""];
+    // @gotag: bson:"volume_24h"
+    double volume_24h = 2;
     // PercentChange1h
-    double percent_change_1h = 3 [(tagger.tags)="bson:\"percent_change_1h\""];
+    // @gotag: bson:"percent_change_1h"
+    double percent_change_1h = 3;
     // PercentChange24h
-    double percent_change_24h = 4 [(tagger.tags)="bson:\"percent_change_24h\""];
+    // @gotag: bson:"percent_change_24h"
+    double percent_change_24h = 4;
     // PercentChange7d
-    double percent_change_7d = 5 [(tagger.tags)="bson:\"percent_change_7dh\""];
+    // @gotag: bson:"percent_change_7d"
+    double percent_change_7d = 5;
     // MarketCap
-    double market_cap = 6 [(tagger.tags)="bson:\"market_cap\""];
+    // @gotag: bson:"market_cap"
+    double market_cap = 6;
     // LastUpdated 
-	string last_updated = 7 [(tagger.tags)="bson:\"last_updated\""];
+    // @gotag: bson:"last_updated"
+	string last_updated = 7;
 }
 
 // CoinmarketCapListing holds the info of the coin.
 message CoinmarketCapListing {
     // Quote represnets the quote of the cryptocurrency in different fiat currencies.
-    map<string,CoinmarketCapQuote> quote = 1 [(tagger.tags)="bson:\"quote\""];
+    // @gotag: bson:"quote"
+    map<string,CoinmarketCapQuote> quote = 1;
     // MaxSupply represents the max supply this currency can have.
-    double max_supply = 2 [(tagger.tags)="bson:\"max_supply\""];;
+    // @gotag: bson:"max_supply"
+    double max_supply = 2;;
     // TotalSupply represents the total supply this currency can have.
-    double total_supply = 3 [(tagger.tags)="bson:\"total_supply\""];;
+    // @gotag: bson:"total_supply"
+    double total_supply = 3;
     // CMCRank represents the cmc rank of the coin.
-    int32 cmc_rank = 4 [(tagger.tags)="bson:\"cmc_rank\""];;
+    // @gotag: bson:"cmc_rank"
+    int32 cmc_rank = 4;;
     // CirculatingSupply is how many is currenly in circulation.
-    double circulating_supply = 5 [(tagger.tags)="bson:\"circulating_supply\""];
+    // @gotag: bson:"circulating_supply"
+    double circulating_supply = 5;
     // LastUpdated was the last time this was updated.
-    string last_updated = 6 [(tagger.tags)="bson:\"last_updated\""];;
+    // @gotag: bson:"last_updated"
+    string last_updated = 6;
 }
 
 // CoinmarketCapMetadata represents the coin metadata.
 message CoinmarketCapMetadata {
     // Description represents the coin description.
-    string description = 1 [(tagger.tags)="bson:\"description\""];
+    // @gotag: bson:"description"
+    string description = 1;
     // DateAdded represents the date the coin was added.
-	string date_added = 2 [(tagger.tags)="bson:\"date_added\""];
+    // @gotag: bson:"date_added"
+	string date_added = 2;
     // DateLaunched represents the date the coin was launched.
-	string date_launched = 3 [(tagger.tags)="bson:\"date_launched\""];
+    // @gotag: bson:"date_launched"
+	string date_launched = 3;
     // Category represents the category of the coin.
-	string category = 4 [(tagger.tags)="bson:\"category\""];
+    // @gotag: bson:"category"
+	string category = 4;
     // Logo represents the coin logo.
-	string logo = 5 [(tagger.tags)="bson:\"logo\""];
+    // @gotag: bson:"logo"
+	string logo = 5;
     // Urls represents other urls of the coin.
-	CoinmarketCapUrls urls = 6 [(tagger.tags)="bson:\"urls\""];
+    // @gotag: bson:"urls"
+	CoinmarketCapUrls urls = 6;
 }
 
 // CoinmarketCapMetadata represents the md of the coin.
 message CoinmarketCapUrls {
     // Website represents the website of the cmc data.
-    repeated string website = 1 [(tagger.tags)="bson:\"website\""];
+    // @gotag: bson:"website"
+    repeated string website = 1;
     // Twitter represents the twitter info of the cmc data.
-	repeated string twitter = 2 [(tagger.tags)="bson:\"twitter\""];
+    // @gotag: bson:"twitter"
+	repeated string twitter = 2;
     // Reddit represents the reddit info of the cmc data.
-	repeated string reddit = 3 [(tagger.tags)="bson:\"reddit\""];
+    // @gotag: bson:"reddit"
+	repeated string reddit = 3;
     // SourceCode represents the source_code info of the cmc data.
-    repeated string source_code = 4 [(tagger.tags)="bson:\"source_code\""];
+    // @gotag: bson:"source_code"
+    repeated string source_code = 4;
     // Chat represents the chat infomration of the currency.
-    repeated string chat = 5 [(tagger.tags)="bson:\"chat\""];
+    // @gotag: bson:"chat"
+    repeated string chat = 5;
     // TechnicalDoc represents the technical doc of the data.
-	repeated string technical_doc = 6 [(tagger.tags)="bson:\"technical_doc\""];
+    // @gotag: bson:"technical_doc"
+	repeated string technical_doc = 6;
     // MessageBoards represents the technical doc of the data.
-	repeated string message_board = 7 [(tagger.tags)="bson:\"message_board\""];
+    // @gotag: bson:"message_board"
+	repeated string message_board = 7;
     // Explorer represents the technical doc of the data.
-	repeated string explorer = 8 [(tagger.tags)="bson:\"explorer\""];
+    // @gotag: bson:"explorer"
+	repeated string explorer = 8;
     // Announcement represents the technical doc of the data.
-	repeated string announcement = 9 [(tagger.tags)="bson:\"annoucement\""];
+    // @gotag: bson:"announcement"
+	repeated string announcement = 9;
 }

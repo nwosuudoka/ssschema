@@ -41,7 +41,7 @@ get_go_tools:
 	@echo Installing protobuf golang and gRPC drivers
 	@go install google.golang.org/protobuf/cmd/protoc-gen-go@v${PROTOC_GEN_GO_VERSION}
 	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v${PROTOC_GEN_GO_GRPC_VERSION}
-
+	@go get -u github.com/favadi/protoc-go-inject-tag
 
 get_nodejs_tools:
 	# curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
@@ -49,9 +49,9 @@ get_nodejs_tools:
 	# node --version
 	# npm i -g --production grpc_tools_node_protoc_ts
 	# npm i -g --production grpc-tools --unsafe-perm
-	# npm i --production grpc_tools_node_protoc_ts
-	# npm i --production grpc-tools --unsafe-perm
-	npm i
+	npm i --production grpc_tools_node_protoc_ts
+	npm i --production grpc-tools --unsafe-perm
+	# npm i
 
 get_nodejs_tools_nvm:
 # Install this if nvm is required
@@ -75,7 +75,8 @@ nvm_use:
 generate: lint
 	rm -rf build
 	buf generate -o build proto
-	buf generate --template=buf.gen.tag.yaml proto
+	# buf generate --template=buf.gen.tag.yaml proto
+	find . -type f -name "*.pb.go" -exec protoc-go-inject-tag -input="{}" \;
 
 lint:
 	buf breaking --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main,subdir=proto' proto
