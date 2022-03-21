@@ -78,5 +78,5 @@ generate: lint
 	buf generate --template=buf.gen.tag.yaml proto
 
 lint:
-	# buf breaking --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main,subdir=protos' protos
+	buf breaking --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main,subdir=proto' proto
 	buf lint proto/
