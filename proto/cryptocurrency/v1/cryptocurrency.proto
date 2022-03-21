@@ -7,7 +7,7 @@ option go_package = "github.com/nwosuudoka/sscproto/build/go/cryptocurrency/v1";
 // Cryptocurrency represents the schema for a cryptocurrency
 message Cryptocurrency {
     // Id represents the id of the record in the database.
-    // @gotags: bson:"id"
+    // @gotags: bson:"_id"
     string id = 1;
     // Name represents the name of the currency.
     // @gotags: bson:"name"
