@@ -7,17 +7,21 @@ option go_package = "github.com/nwosuudoka/sscproto/build/go/cryptocurrency/v1";
 // Cryptocurrency represents the schema for a cryptocurrency
 message Cryptocurrency {
     // Id represents the id of the record in the database.
+    // @gotags: bson:"id"
     string id = 1;
     // Name represents the name of the currency.
+    // @gotags: bson:"name"
     string name = 2;
     // Symbol represnets the symbol of the currency.
+    // @gotags: bson:"symbol"
     string symbol = 3;
     // Logo represents the logo of the cryptocurrency.
+    // @gotags: bson:"logo"
     string logo = 4;
     // Platforms represents the platforms where this currencies are.
+    // @gotags: bson:"platforms"
     repeated string platforms = 5;
     // Coinmarketcap represents the coin market cap data.
-    // CoinmarketCap coin_market_cap = 6;
     // @gotags: bson:"coinMarketCap"
     CoinmarketCap coin_market_cap = 6;
 }

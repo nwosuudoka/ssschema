@@ -27,17 +27,21 @@ type Cryptocurrency struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Id represents the id of the record in the database.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// @gotags: bson:"id"
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"id"`
 	// Name represents the name of the currency.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// @gotags: bson:"name"
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name"`
 	// Symbol represnets the symbol of the currency.
-	Symbol string `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	// @gotags: bson:"symbol"
+	Symbol string `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty" bson:"symbol"`
 	// Logo represents the logo of the cryptocurrency.
-	Logo string `protobuf:"bytes,4,opt,name=logo,proto3" json:"logo,omitempty"`
+	// @gotags: bson:"logo"
+	Logo string `protobuf:"bytes,4,opt,name=logo,proto3" json:"logo,omitempty" bson:"logo"`
 	// Platforms represents the platforms where this currencies are.
-	Platforms []string `protobuf:"bytes,5,rep,name=platforms,proto3" json:"platforms,omitempty"`
+	// @gotags: bson:"platforms"
+	Platforms []string `protobuf:"bytes,5,rep,name=platforms,proto3" json:"platforms,omitempty" bson:"platforms"`
 	// Coinmarketcap represents the coin market cap data.
-	// CoinmarketCap coin_market_cap = 6;
 	// @gotags: bson:"coinMarketCap"
 	CoinMarketCap *CoinmarketCap `protobuf:"bytes,6,opt,name=coin_market_cap,json=coinMarketCap,proto3" json:"coin_market_cap,omitempty" bson:"coinMarketCap"`
 }
