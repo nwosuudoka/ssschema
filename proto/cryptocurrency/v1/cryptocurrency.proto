@@ -26,11 +26,11 @@ message Cryptocurrency {
 // CoinmarketCap represents the coin market cap information.
 message CoinmarketCap {
     // Id represnets the coinmarketcap id.
-    int32 id = 1 [(tagger.tags)="bson:\"platforms\""];
+    int32 id = 1 [(tagger.tags)="bson:\"id\""];
     // CoinmarketCapListing represents the coin listing info
-    CoinmarketCapListing listing = 2 [(tagger.tags)="bson:\"platforms\""];
+    CoinmarketCapListing listing = 2 [(tagger.tags)="bson:\"listing\""];
     // CoinmarketCapListing holds coinmarketcap info.
-    CoinmarketCapMetadata info = 3 [(tagger.tags)="bson:\"platforms\""];
+    CoinmarketCapMetadata info = 3 [(tagger.tags)="bson:\"info\""];
 }
 
 
