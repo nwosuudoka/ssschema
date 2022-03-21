@@ -1,0 +1,18 @@
+version: v1
+name: buf.build/nwosuudoka/ssschema
+deps:
+  - buf.build/srikrsna/protoc-gen-gotag
+lint:
+  ignore:
+    - google
+  use:
+    - DEFAULT
+    - COMMENTS
+    - FILE_LOWER_SNAKE_CASE
+  rpc_allow_google_protobuf_empty_requests: true
+  rpc_allow_google_protobuf_empty_responses: true
+
+breaking:
+  ignore_unstable_packages: true
+  use:
+    - WIRE

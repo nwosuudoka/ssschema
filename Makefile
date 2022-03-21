@@ -74,8 +74,9 @@ nvm_use:
 
 generate: lint
 	rm -rf build
-	buf generate protos/ -o build
+	buf generate -o build proto
+	buf generate --template=buf.gen.tag.yaml proto
 
 lint:
-	buf breaking --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main,subdir=protos' protos
-	buf lint protos/
+	# buf breaking --against 'https://github.com/nwosuudoka/ssprotos.git#branch=main,subdir=protos' protos
+	buf lint proto/
