@@ -27,8 +27,8 @@ type Cryptocurrency struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Id represents the id of the record in the database.
-	// @gotags: bson:"id"
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"id"`
+	// @gotags: bson:"_id"
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id"`
 	// Name represents the name of the currency.
 	// @gotags: bson:"name"
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" bson:"name"`
