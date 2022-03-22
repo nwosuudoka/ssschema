@@ -75,6 +75,7 @@ nvm_use:
 generate: lint
 	rm -rf build
 	buf generate -o build proto
+	find . -type f -name "*_pb.d.ts" | xargs gsed -i 's/\(List\|Map\): /: /g'
 	find . -type f -name "*.pb.go" -exec protoc-go-inject-tag -input="{}" \;
 
 lint:

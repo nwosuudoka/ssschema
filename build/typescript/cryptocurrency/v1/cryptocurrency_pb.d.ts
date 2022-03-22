@@ -6,7 +6,7 @@
 
 import * as jspb from "google-protobuf";
 
-export class Cryptocurrency extends jspb.Message { 
+export class Cryptocurrency extends jspb.Message {
     getId(): string;
     setId(value: string): Cryptocurrency;
     getName(): string;
@@ -28,8 +28,8 @@ export class Cryptocurrency extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Cryptocurrency.AsObject;
     static toObject(includeInstance: boolean, msg: Cryptocurrency): Cryptocurrency.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Cryptocurrency, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Cryptocurrency;
     static deserializeBinaryFromReader(message: Cryptocurrency, reader: jspb.BinaryReader): Cryptocurrency;
@@ -41,12 +41,12 @@ export namespace Cryptocurrency {
         name: string,
         symbol: string,
         logo: string,
-        platformsList: Array<string>,
+        platforms: Array<string>,
         coinMarketCap?: CoinmarketCap.AsObject,
     }
 }
 
-export class CoinmarketCap extends jspb.Message { 
+export class CoinmarketCap extends jspb.Message {
     getId(): number;
     setId(value: number): CoinmarketCap;
 
@@ -63,8 +63,8 @@ export class CoinmarketCap extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CoinmarketCap.AsObject;
     static toObject(includeInstance: boolean, msg: CoinmarketCap): CoinmarketCap.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CoinmarketCap, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CoinmarketCap;
     static deserializeBinaryFromReader(message: CoinmarketCap, reader: jspb.BinaryReader): CoinmarketCap;
@@ -78,7 +78,7 @@ export namespace CoinmarketCap {
     }
 }
 
-export class CoinmarketCapQuote extends jspb.Message { 
+export class CoinmarketCapQuote extends jspb.Message {
     getPrice(): number;
     setPrice(value: number): CoinmarketCapQuote;
     getVolume24h(): number;
@@ -97,8 +97,8 @@ export class CoinmarketCapQuote extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CoinmarketCapQuote.AsObject;
     static toObject(includeInstance: boolean, msg: CoinmarketCapQuote): CoinmarketCapQuote.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CoinmarketCapQuote, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CoinmarketCapQuote;
     static deserializeBinaryFromReader(message: CoinmarketCapQuote, reader: jspb.BinaryReader): CoinmarketCapQuote;
@@ -116,7 +116,7 @@ export namespace CoinmarketCapQuote {
     }
 }
 
-export class CoinmarketCapListing extends jspb.Message { 
+export class CoinmarketCapListing extends jspb.Message {
 
     getQuoteMap(): jspb.Map<string, CoinmarketCapQuote>;
     clearQuoteMap(): void;
@@ -134,8 +134,8 @@ export class CoinmarketCapListing extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CoinmarketCapListing.AsObject;
     static toObject(includeInstance: boolean, msg: CoinmarketCapListing): CoinmarketCapListing.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CoinmarketCapListing, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CoinmarketCapListing;
     static deserializeBinaryFromReader(message: CoinmarketCapListing, reader: jspb.BinaryReader): CoinmarketCapListing;
@@ -144,7 +144,7 @@ export class CoinmarketCapListing extends jspb.Message {
 export namespace CoinmarketCapListing {
     export type AsObject = {
 
-        quoteMap: Array<[string, CoinmarketCapQuote.AsObject]>,
+        quote: Array<[string, CoinmarketCapQuote.AsObject]>,
         maxSupply: number,
         totalSupply: number,
         cmcRank: number,
@@ -153,7 +153,7 @@ export namespace CoinmarketCapListing {
     }
 }
 
-export class CoinmarketCapMetadata extends jspb.Message { 
+export class CoinmarketCapMetadata extends jspb.Message {
     getDescription(): string;
     setDescription(value: string): CoinmarketCapMetadata;
     getDateAdded(): string;
@@ -173,8 +173,8 @@ export class CoinmarketCapMetadata extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CoinmarketCapMetadata.AsObject;
     static toObject(includeInstance: boolean, msg: CoinmarketCapMetadata): CoinmarketCapMetadata.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CoinmarketCapMetadata, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CoinmarketCapMetadata;
     static deserializeBinaryFromReader(message: CoinmarketCapMetadata, reader: jspb.BinaryReader): CoinmarketCapMetadata;
@@ -191,7 +191,7 @@ export namespace CoinmarketCapMetadata {
     }
 }
 
-export class CoinmarketCapUrls extends jspb.Message { 
+export class CoinmarketCapUrls extends jspb.Message {
     clearWebsiteList(): void;
     getWebsiteList(): Array<string>;
     setWebsiteList(value: Array<string>): CoinmarketCapUrls;
@@ -232,8 +232,8 @@ export class CoinmarketCapUrls extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CoinmarketCapUrls.AsObject;
     static toObject(includeInstance: boolean, msg: CoinmarketCapUrls): CoinmarketCapUrls.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CoinmarketCapUrls, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CoinmarketCapUrls;
     static deserializeBinaryFromReader(message: CoinmarketCapUrls, reader: jspb.BinaryReader): CoinmarketCapUrls;
@@ -241,14 +241,14 @@ export class CoinmarketCapUrls extends jspb.Message {
 
 export namespace CoinmarketCapUrls {
     export type AsObject = {
-        websiteList: Array<string>,
-        twitterList: Array<string>,
-        redditList: Array<string>,
-        sourceCodeList: Array<string>,
-        chatList: Array<string>,
-        technicalDocList: Array<string>,
-        messageBoardList: Array<string>,
-        explorerList: Array<string>,
-        announcementList: Array<string>,
+        website: Array<string>,
+        twitter: Array<string>,
+        reddit: Array<string>,
+        sourceCode: Array<string>,
+        chat: Array<string>,
+        technicalDoc: Array<string>,
+        messageBoard: Array<string>,
+        explorer: Array<string>,
+        announcement: Array<string>,
     }
 }
